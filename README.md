@@ -1,7 +1,7 @@
 <!-- This file is modified by guole.fun -->
 # Butterfly 统计图表
-> Modified from [hexo-charts](https://www.npmjs.com/package/hexo-charts)
-> Modified from [hexo-statistics-charts](https://www.npmjs.com/package/hexo-statistics-charts).
+> Modified from [hexo-charts](https://www.npmjs.com/package/hexo-charts)  
+> Modified from [hexo-statistics-charts](https://www.npmjs.com/package/hexo-statistics-charts)  
 
 ## 修改说明
 * 页面文案调整回中文
@@ -21,23 +21,23 @@
 
 ## 示例
 
-* Post Calendar 发布日历
+* 发布日历
   
 ![发布日历](https://cdn.guole.fun/img/202107/发布日历.png)
 
-* Post Statistics 发布统计
+* 发布统计
   
 ![发布统计](https://cdn.guole.fun/img/202107/发布统计.png)
 
-* Tag Statistics 标签统计
+* 标签统计
   
 ![标签统计](https://cdn.guole.fun/img/202107/标签统计.png)
 
-* Category Statistics (without title) 分类统计（无标题）
+* 分类统计（无标题）
   
 ![分类统计（无标题）](https://cdn.guole.fun/img/202107/分类.png)
 
-* Category Radar Chart (without title) 分类雷达图（无标题）
+* 分类雷达图（无标题）
   
 ![分类雷达图（无标题）](https://cdn.guole.fun/img/202107/分类雷达.png)
 
@@ -48,6 +48,11 @@
 ```shell
 npm install hexo-butterfly-charts --save
 ```
+
+### 注意  
+  
+以下内容在 ```butterfly v3.8.2``` 中验证通过，其他版本请自行验证。
+  
 ---
 
 ## 用法
@@ -147,4 +152,4 @@ block content
 ---
 
 ## 许可
-[Apache License 2.0](https://github.com/george16886/hexo-statistics-charts/blob/master/LICENSE)
+[Apache License 2.0](https://github.com/kuole-o/hexo-butterfly-charts/blob/main/LICENSE)
