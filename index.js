@@ -15,11 +15,13 @@ hexo.extend.filter.register('after_generate', function () {
     if (!(config && config.enable)) return
     // 集体声明配置项
     const data = {
-        postsChart_Title: config.postsChart_Title ? config.postsChart_Title : "",
-        postsCalendar_Title: config.postsCalendar_Title ? config.postsCalendar_Title : "",
-        tagsChart_Title: config.tagsChart_Title ? config.tagsChart_Title : "",
-        categoriesChart_Title: config.categoriesChart_Title ? config.categoriesChart_Title : "",
-        categoriesRadar_Title: config.categoriesRadar_Title ? config.categoriesRadar_Title : ""
+        postsChart_Title: config.postsChart.title ? config.postsChart.title : "",
+        postsCalendar_Title: config.postsCalendar_title ? config.postsCalendar_title : "",
+        tagsChart_Title: config.tagsChart.title ? config.tagsChart.title : "",
+        categoriesChart_Title: config.categoriesChart_title ? config.categoriesChart_title : "",
+        categoriesRadar_Title: config.categoriesRadar_title ? config.categoriesRadar_title : "",
+        postsChart_interval: config.postsChart.interval ? config.postsChart.interval : 0,
+        tagsChart_interval: config.tagsChart.interval ? config.tagsChart.interval : 0
       }
 
 hexo.extend.filter.register('after_render:html', function (locals) {
@@ -32,7 +34,7 @@ hexo.extend.filter.register('after_render:html', function (locals) {
   let htmlEncode = false
 
   if (post.length > 0 || tag.length > 0 || category.length > 0 || calendar.length > 0 || radar.length > 0) {
-    $('head').after('<style type="text/css">#posts-chart,#posts-calendar,#categories-chart,#categories-radar,#tags-chart{width: 100%;height: 300px;margin: 0.5rem auto;padding: 0.5rem;overflow-x: auto;}</style><script type="text/javascript" data-pjax src="https://cdn.jsdelivr.net/npm/echarts@4.7.0/dist/echarts.min.js"></script>')
+    $('head').after('<style type="text/css">#posts-chart,#posts-calendar,#categories-chart,#categories-radar,#tags-chart{width: 100%;height: 300px;margin: 0.5rem auto;padding: 0.5rem;display: flex;}</style><script type="text/javascript" data-pjax src="https://cdn.jsdelivr.net/npm/echarts@4.7.0/dist/echarts.min.js"></script>')
     if (post.length > 0 && $('#postsChart').length === 0) {
       if (post.attr('data-encode') === 'true') htmlEncode = true
       post.after(postsChart())
@@ -115,7 +117,7 @@ function postsChart () {
                 }
               },
               axisLabel: {
-                  interval:0,
+                  interval:${data.postsChart_interval},
                   rotate:20
                },
             data: ${monthArr}
@@ -343,7 +345,7 @@ function tagsChart (dataLength = 10) {
                 }
               },
               axisLabel: {
-                  interval:0,
+                  interval:${data.tagsChart_interval},
                   rotate:20
                },
               grid: {
@@ -440,7 +442,10 @@ function categoriesChart () {
         title: {
             text: '${data.categoriesChart_Title}',
             top: 0,
-            x: 'center'
+            x: 'center',
+            textStyle: {
+              color: color
+          }
         },
         tooltip: {
             trigger: 'item',
@@ -489,12 +494,6 @@ function categoriesRadar () {
   const radarValueData = JSON.stringify(radarValueArr);
 
   return `
-  <style type="text/css">
-    #category-radar {
-        width: 100%;
-        height: 360px;
-    }
-</style>
   <script id="categoriesRadar" data-pjax>
     var color = '#6e7f98';
     var color = document.documentElement.getAttribute('data-theme') === 'light' ? '#4c4948' : '#afb8c5';
@@ -506,7 +505,7 @@ function categoriesRadar () {
             textStyle: {
                 fontWeight: 500,
                 fontSize: 22,
-                color: ''
+                color: color
             }
         },
         tooltip: {},
