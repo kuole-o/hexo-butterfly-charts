@@ -8,6 +8,20 @@
 const cheerio = require('cheerio')
 const moment = require('moment')
 
+hexo.extend.filter.register('after_generate', function () {
+    // 首先获取整体的配置项名称
+    const config = hexo.config.charts ? hexo.config.charts : hexo.theme.config.charts
+    // 如果配置开启
+    if (!(config && config.enable)) return
+    // 集体声明配置项
+    const data = {
+        postsChart_Title: config.postsChart_Title ? config.postsChart_Title : "",
+        postsCalendar_Title: config.postsCalendar_Title ? config.postsCalendar_Title : "",
+        tagsChart_Title: config.tagsChart_Title ? config.tagsChart_Title : "",
+        categoriesChart_Title: config.categoriesChart_Title ? config.categoriesChart_Title : "",
+        categoriesRadar_Title: config.categoriesRadar_Title ? config.categoriesRadar_Title : ""
+      }
+
 hexo.extend.filter.register('after_render:html', function (locals) {
   const $ = cheerio.load(locals)
   const post = $('#posts-chart')
@@ -18,7 +32,7 @@ hexo.extend.filter.register('after_render:html', function (locals) {
   let htmlEncode = false
 
   if (post.length > 0 || tag.length > 0 || category.length > 0 || calendar.length > 0 || radar.length > 0) {
-    $('head').after('<style type="text/css">#posts-chart,#posts-calendar,#categories-chart,#categories-radar,#tags-chart{width: 100%;height: 300px;margin: 0.5rem auto;padding: 0.5rem;overflow-x: auto;}</style><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@4.7.0/dist/echarts.min.js"></script>')
+    $('head').after('<style type="text/css">#posts-chart,#posts-calendar,#categories-chart,#tags-chart{width: 100%;height: 300px;margin: 0.5rem auto;padding: 0.5rem;overflow-x: auto;}</style><script type="text/javascript" data-pjax src="https://cdn.jsdelivr.net/npm/echarts@4.7.0/dist/echarts.min.js"></script>')
     if (post.length > 0 && $('#postsChart').length === 0) {
       if (post.attr('data-encode') === 'true') htmlEncode = true
       post.after(postsChart())
@@ -67,49 +81,93 @@ function postsChart () {
       monthMap.set(month, monthMap.get(month) + 1)
     }
   })
-
+  
   const monthArr = JSON.stringify([...monthMap.keys()])
   const monthValueArr = JSON.stringify([...monthMap.values()])
 
   return `
-  <script id="postsChart">
+  <script id="postsChart" data-pjax>
+    var color = '#6e7f98';
+    var color = document.documentElement.getAttribute('data-theme') === 'light' ? '#4c4948' : '#afb8c5';
     let postsChart = echarts.init(document.getElementById('posts-chart'));
     let postsOption = {
         title: {
-            text: '文章发布统计',
+            text: '${data.postsChart_Title}',
             top: -5,
-            x: 'center'
+            x: 'center',
+            textStyle: {
+                color: color
+            }
         },
         tooltip: {
             trigger: 'axis'
         },
         xAxis: {
+            name: '日期',
             type: 'category',
+            axisTick: {
+                show: false
+              },
+              axisLine: {
+                show: true,
+                lineStyle: {
+                  color: color
+                }
+              },
+              axisLabel: {
+                  interval:0,
+                  rotate:20
+               },
             data: ${monthArr}
         },
         yAxis: {
+            name: '文章篇数',
             type: 'value',
-        },
+            splitLine: {
+                show: false
+              },
+              axisTick: {
+                show: false
+              },
+              axisLine: {
+                show: true,
+                lineStyle: {
+                  color: color
+                }
+              }
+            },
         series: [
             {
                 // name: 'Number of Post',
                 name: '文章篇数',
                 type: 'line',
-                color: ['#6772e5'],
-                data: ${monthValueArr},
-                markPoint: {
-                    symbolSize: 45,
-                    color: ['#fa755a','#3ecf8e','#82d3f4'],
-                    data: [{
-                        type: '最大值',
-                        itemStyle: {color: ['#3ecf8e']},
-                        name: 'MAX'
-                    }, {
-                        type: 'min',
-                        itemStyle: {color: ['#fa755a']},
-                        name: '最小值'
-                    }]
+                smooth: true,
+                lineStyle: {
+                    width: 0
                 },
+                showSymbol: false,
+                itemStyle: {
+                    opacity: 1,
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                      offset: 0,
+                      color: 'rgba(128, 255, 165)'
+                    },
+                    {
+                      offset: 1,
+                      color: 'rgba(1, 191, 236)'
+                    }])
+                  },
+                  areaStyle: {
+                    opacity: 1,
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                      offset: 0,
+                      color: 'rgba(128, 255, 165)'
+                    }, {
+                      offset: 1,
+                      color: 'rgba(1, 191, 236)'
+                    }])
+                  },
+                data: ${monthValueArr},
                 markLine: {
                     itemStyle: {color: ['#ab47bc']},
                     data: [
@@ -120,10 +178,13 @@ function postsChart () {
         ]
     };
     postsChart.setOption(postsOption);
+    window.addEventListener("resize", () => { 
+        postsChart.resize();
+      });
     </script>`
 }
 
-// Post Canlendar added by george16886
+// Post Canlendar added by guole
 function postsCalendar () {
   // calculate range.
   const startDate = moment().subtract(1, 'years')
@@ -150,15 +211,17 @@ function postsCalendar () {
   datePosts += ']'
 
   return `
-  <script id="postsCalendar">
+  <script id="postsCalendar" data-pjax>
+    var color = '#6e7f98';
+    var color = document.documentElement.getAttribute('data-theme') === 'light' ? '#4c4948' : '#afb8c5';
     let postsCalendar = echarts.init(document.getElementById('posts-calendar'));
     let postsCalendarOption = {
         title: {
             top: 0,
-            text: '文章发布日历',
+            text: '${data.postsCalendar_Title}',
             left: 'center',
             textStyle: {
-                color: '#3C4858'
+                color: color
             }
         },
         tooltip: {
@@ -174,7 +237,7 @@ function postsCalendar () {
         visualMap: {
             show: true,
             showLabel: true,
-            categories: [0, 1, 2, 3, 4],
+            categories: [0, 1, 2, 3, ">=4"],
             calculable: true,
             inRange: {
                 symbol: 'rect',
@@ -184,6 +247,9 @@ function postsCalendar () {
             itemHeight: 12,
             orient: 'horizontal',
             left: 'center',
+            textStyle: {
+                color: color
+            },
             bottom: 30
         },
         calendar: [{
@@ -195,7 +261,7 @@ function postsCalendar () {
                 show: false
             },
             itemStyle: {
-                color: '#196127',
+                color: color,
                 borderColor: '#fff',
                 borderWidth: 2
             },
@@ -203,13 +269,19 @@ function postsCalendar () {
                 show: false
             },
             monthLabel: {
-                nameMap: 'en',
-                fontSize: 11
+                nameMap: 'cn',
+                fontSize: 11,
+                textStyle: {
+                    color: color
+                  }
             },
             dayLabel: {
                 formatter: '{start}  1st',
-                nameMap: ['', 'Mon', '', 'Wed', '', 'Fri', ''],
-                fontSize: 11
+                nameMap: ['', '周一', '', '周三', '', '周五', ''],
+                fontSize: 11,
+                textStyle: {
+                    color: color
+                  }
             }
         }],
         series: [{
@@ -241,30 +313,91 @@ function tagsChart (dataLength = 10) {
   const tagCountArrJson = JSON.stringify(tagCountArr)
 
   return `
-  <script id="tagsChart">
+
+  <script id="tagsChart" data-pjax>
+    var color = '#6e7f98';
+    var color = document.documentElement.getAttribute('data-theme') === 'light' ? '#4c4948' : '#afb8c5';
     let tagsChart = echarts.init(document.getElementById('tags-chart'));
     let tagsOption = {
         title: {
-            text: 'Top ${dataLength} 标签统计',
+            text: '${data.tagsChart_Title}',
             top: -5,
+            textStyle: {
+                color: color
+              },
             x: 'center'
         },
         tooltip: {
             formatter: "{b} : {c}"
         },
         xAxis: {
+            name: '标签',
             type: 'category',
+            axisTick: {
+                show: false
+              },
+              axisLine: {
+                show: true,
+                lineStyle: {
+                  color: color
+                }
+              },
+              axisLabel: {
+                  interval:0,
+                  rotate:20
+               },
+              grid: {
+                left: '10%',
+                bottom:'25%'
+                },
             data: ${tagNameArrJson}
         },
         yAxis: {
-            type: 'value'
-        },
+            name: '文章篇数',
+            type: 'value',
+            splitLine: {
+                show: false
+              },
+              axisTick: {
+                show: false
+              },
+              axisLine: {
+                show: true,
+                lineStyle: {
+                  color: color
+                }
+              }
+            },
         series: [
             {
+                name: '文章篇数',
                 type: 'bar',
                 color: ['#82d3f4'],
-                barWidth : 18,
                 data: ${tagCountArrJson},
+                itemStyle: {
+                    opacity: 1,
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                      offset: 0,
+                      color: 'rgba(128, 255, 165)'
+                    },
+                    {
+                      offset: 1,
+                      color: 'rgba(1, 191, 236)'
+                    }])
+                  },
+                  emphasis: {
+                    itemStyle: {
+                      opacity: 1,
+                      color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgba(128, 255, 195)'
+                      },
+                      {
+                        offset: 1,
+                        color: 'rgba(1, 211, 255)'
+                      }])
+                    }
+                  },
                 markPoint: {
                     symbolSize: 45,
                     data: [{
@@ -299,11 +432,13 @@ function categoriesChart () {
   const categoryArrJson = JSON.stringify(categoryArr)
 
   return `
-  <script id="categoriesChart">
+  <script id="categoriesChart" data-pjax>
+    var color = '#6e7f98';
+    var color = document.documentElement.getAttribute('data-theme') === 'light' ? '#4c4948' : '#afb8c5';
     let categoriesChart = echarts.init(document.getElementById('categories-chart'));
     let categoriesOption = {
         title: {
-            text: '',
+            text: '${data.categoriesChart_Title}',
             top: 0,
             x: 'center'
         },
@@ -333,7 +468,7 @@ function categoriesChart () {
     </script>`
 }
 
-// Category Radar added by george16886
+// Category Radar added by guole
 function categoriesRadar () {
   const categories = hexo.locals.get('categories')
 
@@ -345,37 +480,47 @@ function categoriesRadar () {
   const max = Math.max.apply(null, radarValueArr) + Math.min.apply(null, radarValueArr)
 
   // Calculate the data needed for the radar chart.
-  const indicatorArr = []
+  const indicatorArr = [];
   categories.map(function (category) {
-    indicatorArr.push({ name: category.name, max: max })
-  })
+    indicatorArr.push({ name: category.name, max: max });
+  });
 
-  const indicatorData = JSON.stringify(indicatorArr)
-  const radarValueData = JSON.stringify(radarValueArr)
+  const indicatorData = JSON.stringify(indicatorArr);
+  const radarValueData = JSON.stringify(radarValueArr);
 
   return `
-  <script id="categoriesRadar">
+  <style type="text/css">
+    #category-radar {
+        width: 100%;
+        height: 360px;
+    }
+</style>
+  <script id="categoriesRadar" data-pjax>
+    var color = '#6e7f98';
+    var color = document.documentElement.getAttribute('data-theme') === 'light' ? '#4c4948' : '#afb8c5';
     let categoriesRadar = echarts.init(document.getElementById('categories-radar'));
     let categoriesRadarOption = {
         title: {
             left: 'center',
-            text: '',
+            text: '${data.categoriesRadar_Title}',
             textStyle: {
                 fontWeight: 500,
-                fontSize: 22
+                fontSize: 22,
+                color: ''
             }
         },
         tooltip: {},
         radar: {
             name: {
                 textStyle: {
-                    color: '#3C4858'
+                    color: color
                 }
             },
             indicator: ${indicatorData},
             nameGap: 5,
             center: ['50%','55%'],
-            radius: '75%'
+            radius: '75%',
+            left: 'center'
         },
         series: [{
             type: 'radar',
@@ -393,3 +538,4 @@ function categoriesRadar () {
     categoriesRadar.setOption(categoriesRadarOption);
     </script>`
 }
+})
