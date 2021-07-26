@@ -17,7 +17,7 @@
   * 标签统计
   * 分类统计
   * 分类雷达图
-* 更新日志 v1.0.5
+* 更新日志 v1.0.6
 <details>
 <summary>点击展开</summary>
   * 增加标签的横纵坐标轴名称
@@ -36,28 +36,47 @@
 * 发布日历
   
 ![发布日历](https://guole.fun/posts/18158/发布日历3.jpg)
-![发布日历](https://guole.fun/posts/18158/发布日历4.jpg)
 
 * 发布统计
   
 ![发布统计](https://guole.fun/posts/18158/发布统计3.jpg)
-![发布统计](https://guole.fun/posts/18158/发布统计4.jpg)
 
 * 标签统计
   
 ![标签统计](https://guole.fun/posts/18158/标签3.jpg)
-![标签统计](https://guole.fun/posts/18158/标签4.jpg)
 
 * 分类统计（无标题）/分类雷达图（无标题）
   
 ![分类统计](https://guole.fun/posts/18158/分类统计3.jpg)
-![分类统计](https://guole.fun/posts/18158/分类统计4.jpg)
 
 * 分类雷达图（无标题）
   
 ![分类雷达](https://guole.fun/posts/18158/分类雷达3.jpg)
+
+<details>
+<summary>点击查看暗色模式截图</summary>
+
+* 发布日历
+  
+![发布日历](https://guole.fun/posts/18158/发布日历4.jpg)
+
+* 发布统计
+  
+![发布统计](https://guole.fun/posts/18158/发布统计4.jpg)
+
+* 标签统计
+  
+![标签统计](https://guole.fun/posts/18158/标签4.jpg)
+
+* 分类统计（无标题）/分类雷达图（无标题）
+  
+![分类统计](https://guole.fun/posts/18158/分类统计4.jpg)
+
+* 分类雷达图（无标题）
+  
 ![分类雷达](https://guole.fun/posts/18158/分类雷达4.jpg)
 
+</details>
 ---
 
 ## 安装
