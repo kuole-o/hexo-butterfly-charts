@@ -3,6 +3,8 @@
 > Modified from [hexo-charts](https://www.npmjs.com/package/hexo-charts)  
 > Modified from [hexo-statistics-charts](https://www.npmjs.com/package/hexo-statistics-charts)  
 
+## [Demo页面](https://guole.fun/charts/)
+
 ## 修改说明
 * 页面文案调整回中文
 * 删除类别统计图表的标题
@@ -34,7 +36,7 @@
   * 当前根据主题自动切换颜色的功能，似乎受Pjax影响，加了```data-pjax```也不行，如果你解决了，欢迎在这里提交PR：https://github.com/kuole-o/hexo-butterfly-charts
 ---
 
-## 示例
+## 示例 [Demo](https://guole.fun/charts/)
 
 * 发布日历
   
