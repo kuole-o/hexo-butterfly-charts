@@ -20,9 +20,13 @@
   * 分类统计
   * 分类雷达图  
 
-* 更新日志 v1.1.1
+* 更新日志
 <details>
-<summary>点击展开</summary>
+<summary>点击展开 v1.1.2</summary>
+  * 调整分类统计图中，“# 文章分类”为 “✒️文章篇数” <br>
+</details>
+<details>
+<summary>点击展开 v1.1.1</summary>
   * 增加标签的横纵坐标轴名称 <br>
   * 适配butterfly暗色模式，自动切换 <br>
   * 文章发布日历坐标也换成中文 <br>

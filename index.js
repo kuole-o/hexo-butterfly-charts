@@ -454,7 +454,7 @@ function categoriesChart () {
         series: [
             {
                 // name: 'Category:',
-                name: '# 分类',
+                name: '✒️文章篇数',
                 type: 'pie',
                 radius: '75%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
@@ -529,7 +529,7 @@ function categoriesRadar () {
                 {
                     value : ${radarValueData},
                     // name : 'Categories:'
-                    name: '# 文章分类'
+                    name: '✒️文章篇数'
                 }
             ]
         }]
