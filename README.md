@@ -22,6 +22,10 @@
 
 * 更新日志
 <details>
+<summary>点击展开 v1.1.4</summary>
+  * 更新 moment 到 2.29.4 <br>
+</details>
+<details>
 <summary>点击展开 v1.1.2</summary>
   * 调整分类统计图中，“# 文章分类”为 “✒️文章篇数” <br>
 </details>
