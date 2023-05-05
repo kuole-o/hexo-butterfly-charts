@@ -1,6 +1,6 @@
 {
   "name": "hexo-butterfly-charts",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "Render statistics of hexo poats, categories, and tags into charts.This is a modified version based on hexo-statistics-charts.",
   "main": "index.js",
   "scripts": {
@@ -24,6 +24,6 @@
   "homepage": "https://github.com/kuole-o/hexo-butterfly-charts#readme",
   "dependencies": {
     "cheerio": "^1.0.0-rc.10",
-    "moment": "^2.29.1"
+    "moment": "^2.29.4"
   }
 }
