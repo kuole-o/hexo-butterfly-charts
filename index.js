@@ -21,7 +21,8 @@ hexo.extend.filter.register('after_generate', function () {
         categoriesChart_Title: config.categoriesChart_title ? config.categoriesChart_title : "",
         categoriesRadar_Title: config.categoriesRadar_title ? config.categoriesRadar_title : "",
         postsChart_interval: config.postsChart.interval ? config.postsChart.interval : 0,
-        tagsChart_interval: config.tagsChart.interval ? config.tagsChart.interval : 0
+        tagsChart_interval: config.tagsChart.interval ? config.tagsChart.interval : 0,
+        echarts_CDN: config.echarts_CDN ? config.echarts_CDN : 'https://lib.baomitu.com/echarts/4.7.0/echarts.min.js'
       }
 
 hexo.extend.filter.register('after_render:html', function (locals) {
@@ -34,7 +35,7 @@ hexo.extend.filter.register('after_render:html', function (locals) {
   let htmlEncode = false
 
   if (post.length > 0 || tag.length > 0 || category.length > 0 || calendar.length > 0 || radar.length > 0) {
-    $('head').after('<style type="text/css">#posts-chart,#posts-calendar,#categories-chart,#categories-radar,#tags-chart{width: 100%;height: 300px;margin: 0.5rem auto;padding: 0.5rem;display: flex;}</style><script type="text/javascript" data-pjax src="https://cdn.jsdelivr.net/npm/echarts@4.7.0/dist/echarts.min.js"></script>')
+    $('head').after('<style type="text/css">#posts-chart,#posts-calendar,#categories-chart,#categories-radar,#tags-chart{width: 100%;height: 300px;margin: 0.5rem auto;padding: 0.5rem;display: flex;}</style><script type="text/javascript" data-pjax src="' + data.echarts_CDN + '"></script>')
     if (post.length > 0 && $('#postsChart').length === 0) {
       if (post.attr('data-encode') === 'true') htmlEncode = true
       post.after(postsChart())

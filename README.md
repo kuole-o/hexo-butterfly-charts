@@ -22,6 +22,27 @@
 
 * 更新日志
 <details>
+<summary>点击展开 v1.1.5</summary>
+  * 插件默认 `echarts_CDN` 修改为：`https://lib.baomitu.com/echarts/4.7.0/echarts.min.js` <br>
+  * 新增配置项：`echarts_CDN` 解决原来使用的固定 CDN 资源失效问题。使用方法： <br>
+```yml
+# 统计图表，支持发布文章统计、发布日历、Top标签统计、分类统计、分类雷达。
+# see https://www.npmjs.com/package/hexo-butterfly-charts
+charts:
+  enable: true # 是否启用功能
+  postsChart:
+    title: 文章发布统计 # 设置文章发布统计的标题，默认为空
+    interval: 1 # 横坐标间隔
+  tagsChart:
+    title: Top 10 标签统计 # 设置标签统计的标题，默认为空
+    interval: 1 # 横坐标间隔
+  postsCalendar_title: 文章发布日历 # 设置发布日历的标题，默认为空
+  categoriesChart_title: # 设置分类统计的标题，默认为空
+  categoriesRadar_title: # 设置分类雷达的标题，默认为空
++ echarts_CDN: # https://lib.baomitu.com/echarts/4.7.0/echarts.min.js
+```
+</details>
+<details>
 <summary>点击展开 v1.1.4</summary>
   * 更新 moment 到 2.29.4 <br>
 </details>
@@ -40,8 +61,8 @@
   Bug: <br>
     * 解决雷达图上，鼠标hover时，超出内容被画布吞掉的问题  
 </details>
-* 已知问题 <br>
-  * 当前根据主题自动切换颜色的功能，似乎受Pjax影响，加了```data-pjax```也不行，如果你解决了，欢迎在这里提交PR：https://github.com/kuole-o/hexo-butterfly-charts
+~~已知问题~~ 已解决<br>
+~~当前根据主题自动切换颜色的功能，似乎受Pjax影响，加了```data-pjax```也不行，如果你解决了，欢迎在这里提交PR：https://github.com/kuole-o/hexo-butterfly-charts~~
 ---
 
 ## 示例 [Demo](https://guole.fun/charts/)
