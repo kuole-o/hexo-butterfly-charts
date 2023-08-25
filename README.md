@@ -22,6 +22,11 @@
 
 * 更新日志
 <details>
+<summary>点击展开 v1.1.6</summary>
+  * 字体、标题与图表区域间隔等视觉样式微调； <br>
+  * 文章发布日历，绘图区域未居中修正； <br>
+</details>
+<details>
 <summary>点击展开 v1.1.5</summary>
   * 插件默认 `echarts_CDN` 修改为：`https://lib.baomitu.com/echarts/4.7.0/echarts.min.js` <br>
   * 新增配置项：`echarts_CDN` 解决原来使用的固定 CDN 资源失效问题。使用方法： <br>

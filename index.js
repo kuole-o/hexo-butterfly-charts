@@ -96,11 +96,15 @@ function postsChart () {
     let postsOption = {
         title: {
             text: '${data.postsChart_Title}',
-            top: -5,
+            top: 5,
             x: 'center',
             textStyle: {
                 color: color
             }
+        },
+        grid: {
+          top: 90,
+          containLabel: true
         },
         tooltip: {
             trigger: 'axis'
@@ -220,7 +224,7 @@ function postsCalendar () {
     let postsCalendar = echarts.init(document.getElementById('posts-calendar'));
     let postsCalendarOption = {
         title: {
-            top: 0,
+            top: 5,
             text: '${data.postsCalendar_Title}',
             left: 'center',
             textStyle: {
@@ -257,9 +261,9 @@ function postsCalendar () {
         },
         calendar: [{
             top: 90,
-            right: 25,
+            left: 'center',
             range: ${rangeArr},
-            cellSize: [13, 13],
+            cellSize: [14, 14],
             splitLine: {
                 show: false
             },
@@ -273,7 +277,7 @@ function postsCalendar () {
             },
             monthLabel: {
                 nameMap: 'cn',
-                fontSize: 11,
+                fontSize: 12,
                 textStyle: {
                     color: color
                   }
@@ -281,7 +285,7 @@ function postsCalendar () {
             dayLabel: {
                 formatter: '{start}  1st',
                 nameMap: ['', '周一', '', '周三', '', '周五', ''],
-                fontSize: 11,
+                fontSize: 12,
                 textStyle: {
                     color: color
                   }
@@ -324,11 +328,15 @@ function tagsChart (dataLength = 10) {
     let tagsOption = {
         title: {
             text: '${data.tagsChart_Title}',
-            top: -5,
+            top: 5,
             textStyle: {
                 color: color
               },
             x: 'center'
+        },
+        grid: {
+          top: 90,
+          containLabel: true
         },
         tooltip: {
             formatter: "{b} : {c}"
@@ -442,7 +450,7 @@ function categoriesChart () {
     let categoriesOption = {
         title: {
             text: '${data.categoriesChart_Title}',
-            top: 0,
+            top: 5,
             x: 'center',
             textStyle: {
               color: color
