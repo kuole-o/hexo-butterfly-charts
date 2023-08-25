@@ -3,7 +3,7 @@
 > Modified from [hexo-charts](https://www.npmjs.com/package/hexo-charts)  
 > Modified from [hexo-statistics-charts](https://www.npmjs.com/package/hexo-statistics-charts)  
 
-## [Demo页面](https://guole.fun/charts/)
+## [Demo页面](https://blog.guole.fun/charts/)
 
 ## 修改说明
 * 页面文案调整回中文
@@ -61,54 +61,52 @@ charts: <br>
   Bug: <br>
     * 解决雷达图上，鼠标hover时，超出内容被画布吞掉的问题  
 </details>
-~~已知问题~~ 已解决<br>
-~~当前根据主题自动切换颜色的功能，似乎受Pjax影响，加了```data-pjax```也不行，如果你解决了，欢迎在这里提交PR：https://github.com/kuole-o/hexo-butterfly-charts~~
 ---
 
-## 示例 [Demo](https://guole.fun/charts/)
+## 示例 [Demo](https://blog.guole.fun/charts/)
 
 * 发布日历
   
-![发布日历](https://guole.fun/posts/18158/发布日历3.jpg)
+![发布日历](https://blog.guole.fun/posts/18158/发布日历3.jpg)
 
 * 发布统计
   
-![发布统计](https://guole.fun/posts/18158/发布统计3.jpg)
+![发布统计](https://blog.guole.fun/posts/18158/发布统计3.jpg)
 
 * 标签统计
   
-![标签统计](https://guole.fun/posts/18158/标签3.jpg)
+![标签统计](https://blog.guole.fun/posts/18158/标签3.jpg)
 
 * 分类统计（无标题）/分类雷达图（无标题）
   
-![分类统计](https://guole.fun/posts/18158/分类统计3.jpg)
+![分类统计](https://blog.guole.fun/posts/18158/分类统计3.jpg)
 
 * 分类雷达图（无标题）
   
-![分类雷达](https://guole.fun/posts/18158/分类雷达3.jpg)
+![分类雷达](https://blog.guole.fun/posts/18158/分类雷达3.jpg)
 
 <details>
 <summary>点击查看暗色模式截图</summary>
 
 * 发布日历
   
-![发布日历](https://guole.fun/posts/18158/发布日历4.jpg)
+![发布日历](https://blog.guole.fun/posts/18158/发布日历4.jpg)
 
 * 发布统计
   
-![发布统计](https://guole.fun/posts/18158/发布统计4.jpg)
+![发布统计](https://blog.guole.fun/posts/18158/发布统计4.jpg)
 
 * 标签统计
   
-![标签统计](https://guole.fun/posts/18158/标签4.jpg)
+![标签统计](https://blog.guole.fun/posts/18158/标签4.jpg)
 
 * 分类统计（无标题）/分类雷达图（无标题）
   
-![分类统计](https://guole.fun/posts/18158/分类统计4.jpg)
+![分类统计](https://blog.guole.fun/posts/18158/分类统计4.jpg)
 
 * 分类雷达图（无标题）
   
-![分类雷达](https://guole.fun/posts/18158/分类雷达4.jpg)
+![分类雷达](https://blog.guole.fun/posts/18158/分类雷达4.jpg)
 
 </details>
 ---
@@ -121,7 +119,7 @@ npm install hexo-butterfly-charts --save
 
 ## 用法
 
-[点击查看使用方法](https://guole.fun/posts/18158/)
+[点击查看使用方法](https://blog.guole.fun/posts/18158/)
 
 ## 许可
 [Apache License 2.0](https://github.com/kuole-o/hexo-butterfly-charts/blob/main/LICENSE)
